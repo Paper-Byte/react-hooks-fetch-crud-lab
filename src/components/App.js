@@ -27,7 +27,17 @@ function App() {
     setQuestions(newQuestions);
   };
 
-  const handleUpdate = () => {};
+  const handleUpdate = (questionId, newCorrectIndex) => {
+    const newQuestionCorrectIndex = questions.map((question) => {
+      if (question.id === questionId) {
+        question.correctIndex = newCorrectIndex;
+        return question;
+      } else {
+        return question;
+      }
+    });
+    setQuestions(newQuestionCorrectIndex);
+  };
 
   console.log(questions);
   return (

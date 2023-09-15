@@ -23,12 +23,24 @@ function QuestionItem({ question, handleDelete, handleUpdate }) {
     deleteRequest();
   };
 
-  const handleQuestionUpdate = () => {
-    const updateRequest = () => {
-      const resp = fetch(`http://localhost:4000/questions/${id}`, {
-        method: 'PATCH',
-      });
+  const handleQuestionUpdate = (event) => {
+    const updateRequest = async () => {
+      const resp = await fetch(
+        `http://localhost:4000/questions/${id}`,
+        {
+          method: 'PATCH',
+          header: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            'correct-index': event.target.value,
+          }),
+        }
+      );
+      const data = await resp.json();
+      handleUpdate(id, event.target.value);
     };
+    updateRequest();
   };
 
   return (
@@ -37,7 +49,12 @@ function QuestionItem({ question, handleDelete, handleUpdate }) {
       <h5>Prompt: {prompt}</h5>
       <label>
         Correct Answer:
-        <select defaultValue={correctIndex}>{options}</select>
+        <select
+          defaultValue={correctIndex}
+          onChange={handleQuestionUpdate}
+        >
+          {options}
+        </select>
       </label>
       <button onClick={handleQuestionDelete}>Delete Question</button>
     </li>
