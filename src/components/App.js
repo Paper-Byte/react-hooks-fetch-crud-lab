@@ -27,6 +27,8 @@ function App() {
     setQuestions(newQuestions);
   };
 
+  const handleUpdate = () => {};
+
   console.log(questions);
   return (
     <main>
@@ -37,6 +39,7 @@ function App() {
         <QuestionList
           questions={questions}
           handleDelete={handleDelete}
+          handleUpdate={handleUpdate}
         />
       )}
     </main>

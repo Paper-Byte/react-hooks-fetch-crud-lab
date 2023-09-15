@@ -1,6 +1,6 @@
 import React from 'react';
 
-function QuestionItem({ question, handleDelete }) {
+function QuestionItem({ question, handleDelete, handleUpdate }) {
   const { id, prompt, answers, correctIndex } = question;
 
   const options = answers.map((answer, index) => (
@@ -21,6 +21,14 @@ function QuestionItem({ question, handleDelete }) {
       handleDelete(id);
     };
     deleteRequest();
+  };
+
+  const handleQuestionUpdate = () => {
+    const updateRequest = () => {
+      const resp = fetch(`http://localhost:4000/questions/${id}`, {
+        method: 'PATCH',
+      });
+    };
   };
 
   return (
